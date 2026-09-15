@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeafletJS</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+    <style>
+        html,
+        body,
+        #map {
+            height: 100%;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
+        var map = L.map('map').setView([-7.7049804, 110.6018046
+        ], 11
+
+        );
+
+        // Tile Layer Base Map
+        var osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution:
+                '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        });
+
+        var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+        });
+
+        var rupabumiindonesia = L.tileLayer('https://geoservices.big.go.id/rbi/rest/services/BASEMAP/Rupabumi_Indonesia/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Badan Informasi Geospasial'
+        });
+
+        // Menambahkan basemap ke dalam peta
+        Esri_WorldImagery.addTo(map);
+
+        // Marker
+        var marker = L.marker([-7.7049804, 110.6018046]);
+        var marker2 = L.marker([-7.6963596, 110.5646896]);
+
+        // Popup
+        marker.bindPopup("<b>Klaten</b><br>Kabupaten Klaten (bahasa Jawa: ꦏ꧀ꦭꦛꦺꦤ꧀, Pegon: كۤلاڟَينtranslit. Klathèn) adalah sebuah wilayah kabupaten yang terletak di Provinsi Jawa Tengah, Indonesia. Ibu kota kabupaten ini berada di Klaten, yang merupakan gabungan dari 3 kecamatan yakni Klaten Utara, Klaten Tengah, Klaten Selatan, sekitar 36 km sebelah barat daya Kota Surakarta. Kabupaten yang berbatasan dengan Daerah Istimewa Yogyakarta ini memiliki jumlah penduduk sebanyak 1.305.664 jiwa pada semester pertama tahun 2026 dan mayoritas penduduknya merupakan etnis Jawa.");
+        marker.openPopup();
+
+        marker2.bindPopup("<b>Kebonarum</b>Kebonarum adalah sebuah kecamatan di Kabupaten Klaten, Provinsi Jawa Tengah, yang berjarak sekitar 3 menit berkendara dari wilayah sekitar dan terkenal dengan berbagai sumber mata air atau umbulnya.");
+        marker2.openPopup();
+
+        marker.bindTooltip("Klaten");
+        marker.openTooltip();
+
+        marker2.bindTooltip("Kebonarum");
+        marker2.openTooltip();
+
+        // Menambahkan marker ke dalam peta
+        // Menambahkan marker ke dalam peta
+        marker.addTo(map);
+        marker2.addTo(map);
+
+        // Circle
+        var circle = L.circle([-7.6347686, 110.5508709], {
+            color: "red", // warna garis
+            opacity: 1, // opacity garis
+            fillColor: "#f03", // warna fill
+            fillOpacity: 0.5, // opacity fill
+            radius: 1000, // radius dalam meter
+        });
+
+        // Menambahkan circle ke dalam peta
+        circle.addTo(map);
+
+        // Popup
+        circle.bindPopup("<b>Hallo</b><br>Ini adalah popup circle");
+        circle.openPopup();
+
+        // Tooltip
+        circle.bindTooltip("Ini circle", { sticky: true });
+        circle.openTooltip();
+
+        // Polyline
+        var vertexPolyline = [
+            [-7.7695406, 110.5725861],
+            [-7.7055485, 110.5238342],
+            [-7.5659579, 110.6803894],
+        ];
+        var polyline = L.polyline(vertexPolyline, {
+            color: "pink", // warna garis
+            weight: 3, // ketebalan garis
+            opacity: 1, // opacity garis
+        });
+
+        // Menambahkan polyline ke dalam peta
+        polyline.addTo(map);
+
+        // Popup
+        polyline.bindPopup("<b>Hallo</b><br>Ini adalah popup circle");
+        polyline.openPopup();
+
+        // Tooltip
+        polyline.bindTooltip("Ini polyline", { sticky: true });
+        polyline.openTooltip();
+
+        // Polygon
+        var vertexPolygon = [
+            [-7.8105616, 110.6103516],
+            [-7.7486180, 110.5478668],
+            [-7.6614732, 110.6254578],
+            [-7.7138984, 110.7078552],
+            [-7.8105616, 110.6103516]
+        ];
+        var polygon = L.polygon(vertexPolygon, {
+            color: "purple", // warna garis
+            weight: 3, // ketebalan garis
+            opacity: 1, // opacity garis
+            fillColor: "#0f3", // warna fill
+            fillOpacity: 0.5, // opacity fill
+        });
+
+        // Menambahkan polygon ke dalam peta
+        polygon.addTo(map);
+
+        // Popup
+        polygon.bindPopup("<b>Hallo</b><br>Ini adalah popup polygon");
+        polygon.openPopup();
+
+        // Tooltip
+        polygon.bindTooltip("Ini polygon", { sticky: true });
+        polygon.openTooltip();
+
+        // Scale
+        var scale = L.control.scale();
+        scale.addTo(map);
+
+        // Scale 
+        var scale = L.control.scale({
+            position: "bottomright",
+        });
+
+        // // Geolocation
+        // map.locate({
+        //     setView: true,
+        //     maxZoom: 16,
+        // });
+
+        // // Fungsi untuk menampilkan lokasi
+        // function onLocationFound(e) {
+        //     var radius = e.accuracy / 2;
+
+        //     // Menampilkan marker pada lokasi 
+        //     L.marker(e.latlng).addTo(map).bindPopup("Anda berada dalam radius " + radius + " meter dari titik ini").openPopup();
+
+        //     // Menampilkan circle pada lokasi
+        //     L.circle(e.latlng, radius).addTo(map);
+        // }
+
+        // map.on("locationfound", onLocationFound);
+
+        // // Fungsi untuk menampilkan pesan error
+        // function onLocationError(e) {
+        //     alert(e.message);
+        // }
+
+        // map.on("locationerror", onLocationError);
+
+        // Control Layer
+        var baseMaps = {
+            "OpenStreetMap": osm,
+            "Esri World Imagery": Esri_WorldImagery,
+            "Rupa Bumi Indonesia": rupabumiindonesia,
+        };
+
+        var overlayMaps = {
+            "Klaten": marker,
+            "Kebonarom": marker2
+
+
+        };
+
+        var controllayer = L.control.layers(baseMaps, overlayMaps);
+        controllayer.addTo(map);
+
+
+    </script>
+
+</body>
+
+</html>
